@@ -3,7 +3,17 @@ var globarConfig = require('./config');
 var loader = require("./loader");
 
 var app = new express;
-
+// app.set('port', '8080');
+app.all('*', function (req, res, next) {    // 解决跨域问题
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Content-Type,Content-Length, Authorization, Accept,X-Requested-With");
+    res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
+    if (req.method == "OPTIONS") {
+        res.send(200);
+    } else {
+        next();
+    }
+});
 app.use(express.static("./page/"));
 
 app.post("/editEveryDay",loader.get('/editEveryDay'));

@@ -1,5 +1,4 @@
-var  dbutil = require('./dbutil');
-
+var dbutil = require('./dbutil');
 function insertEveryDay (content,ctime,success) {
     var insertSql = "insert into every_day (`content`, `ctime`) values (?, ?)";
     var params = [content,ctime];
@@ -24,7 +23,7 @@ function queryEveryDay(success) {
     connection.query(querySql, params, function (error, result) {
         if (error == null) {
             success(result);
-            // console.log(result)
+            console.log(result)
         } else {
             console.log(error);
         }
